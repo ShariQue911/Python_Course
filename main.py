@@ -5,7 +5,7 @@ from vkontakte import VK
 
 
 def main():
-    token_yandex = ' '
+    token_yandex = 'y0_AgAAAABkk8QRAADLWwAAAADO3RBMg-EGtKtrQyu0lhQ8Ueo2wUeaEG4'
     vkont = VK()
     vk_photo = dict()
     vk_id = ' '

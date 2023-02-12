@@ -10,13 +10,16 @@ class Yandex:
     def __init__(self, token):
         self.token = token
 
-    directory = '/API_IMG/'
-
     def _get_headers(self):
         return {
             'Content-Type': 'application/json',
             'Authorization': 'OAuth ' + self.token
         }
+    def create_folder(self, path):
+        url = 'https://cloud-api.yandex.net/v1/disk/resources'
+        headers = self._get_headers()
+        params = {'path': path}
+        requests.put(f'{url}?path={path}', headers=headers)
 
     def check_photo(self, path):
         """
@@ -52,7 +55,11 @@ class Yandex:
         return response
 
     def upload_urls_vk(self, info_dict):
-        print('Начинаю загрузку на Яндекс.Диск...')
+        cmd_folder = int(input('Создать новую папку? 1 - да; 2 - нет;'))
+        if cmd_folder == 1:
+            folder_name = input('Введите название папки:')
+            create_folder(folder_name)
+            print('Начинаю загрузку на Яндекс.Диск...')
         with open('filedata_yandex.json', 'w') as file:
             counter = 1
             data = dict()
@@ -80,5 +87,6 @@ class Yandex:
                 counter += 1
             json.dump(data, file, indent=4)
             print('Загрузка на Яндекс.Диск завершена.')
+create_folder('POP')
 
 
