@@ -12,11 +12,16 @@ class Yandex:
 
     directory = '/API_IMG/'
 
+    log_file = 'yandex_logs.txt'
+    open(log_file, 'w')
+
     def _get_headers(self):
         return {
             'Content-Type': 'application/json',
             'Authorization': 'OAuth ' + self.token
         }
+        with open(log_file,'a') as f:
+            f.write(now.strftime("%d%m%Y %H:%M:%S")+'\n')
 
     def check_photo(self, path):
         """
@@ -57,6 +62,8 @@ class Yandex:
             counter = 1
             data = dict()
             for items, content in info_dict.items():
+                print(items)
+                print(content)
                 yan_path = str()
                 vk_url = str()
                 filename = str(content['likes']) + '.jpg'
@@ -65,7 +72,10 @@ class Yandex:
                 date = content['date']                # this sets photo's date from metadata
                 is_exist = self.check_photo(yan_path)
                 if is_exist is False:
+                    print('yan_path: '+yan_path)
+                    print(vk_url)
                     response = self.upload_to_disk(yan_path, vk_url)
+                    print(response)
                     if response.status_code == 202:
                         print(f'Файл {filename} загружен на Яндекс.Диск в папку {self.directory.replace("/", "")}\n')
                 elif is_exist is True:
@@ -80,5 +90,12 @@ class Yandex:
                 counter += 1
             json.dump(data, file, indent=4)
             print('Загрузка на Яндекс.Диск завершена.')
+            with open(log_file,'a') as f:
+                f.write(datetime.now().strftime("%d/%m/%Y %H:%M:%S")+': '+'Загрузка на Яндекс.Диск завершена.'+'\n')
 
 
+
+log_file = 'yandex_logs.txt'
+open(log_file, 'w')
+with open(log_file,'a') as f:
+    f.write(datetime.now().strftime("%d/%m/%Y %H:%M:%S")+'\n')

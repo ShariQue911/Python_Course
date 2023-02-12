@@ -26,7 +26,7 @@ class VK:
     """
     Class for working with Vkontakte API
     """
-    token = '958eb5d439726565e9333aa30e50e0f937ee432e927f0dbd541c541887d919a7c56f95c04217915c32008'
+    token = 'vk1.a.Ojcz2TapvQy_x6LArQ0uutDVRhj8TOB_3pTpozy0DqgcM1kMGvPfwoJe8D-vUYaGKCjOixEOVdDs9T-3H60O0ceDDE8RHetvcK7CJeLcHqAdr1mqHEaU4daggTOuU8sI0LadrM4pVYO8IYf3w-Z0T3YoP0lka0amiW91RNRhFxZP1WcvV08t99gH6Cwf7ZOp7i-zXmy5IKLa1BjK5px_EA'
     main_url = 'https://api.vk.com/method/'
 
     def get_photos(self, vk_id, album_id):
@@ -40,7 +40,7 @@ class VK:
         url = self.main_url + 'photos.get/'
         album_name = str()
         params = {
-            'owner_id': vk_id,
+            'owner_id': 221301720,
             'album_id': album_id,
             'extended': '1',
             'photo_sizes': '1',
