@@ -7,19 +7,26 @@ class Yandex:
     """
     Class for working with Yandex API
     """
+
+
     def __init__(self, token):
         self.token = token
+
+    directory = 'create'
 
     def _get_headers(self):
         return {
             'Content-Type': 'application/json',
             'Authorization': 'OAuth ' + self.token
         }
+
     def create_folder(self, path):
-        url = 'https://cloud-api.yandex.net/v1/disk/resources'
+        URL = 'https://cloud-api.yandex.net/v1/disk/resources'
+        TOKEN = 'y0_AgAAAABkk8QRAADLWwAAAADO3RBMg-EGtKtrQyu0lhQ8Ueo2wUeaEG4'
         headers = self._get_headers()
-        params = {'path': path}
-        requests.put(f'{url}?path={path}', headers=headers)
+        path = input('Введите название папки:')
+        requests.put(f'{URL}?path={path}', headers=headers)
+        return path
 
     def check_photo(self, path):
         """
@@ -44,7 +51,7 @@ class Yandex:
         :param ext_url: external URL to upload
         :return: response from server
         """
-        url = 'https://cloud-api.yandex.net/v1/disk/resources/upload'
+        url = 'https://cloud-api.yandex.net/v1/disk/resources/upload/'
         headers = self._get_headers()
         params = {
             "path": remote_file_path,
@@ -55,11 +62,7 @@ class Yandex:
         return response
 
     def upload_urls_vk(self, info_dict):
-        cmd_folder = int(input('Создать новую папку? 1 - да; 2 - нет;'))
-        if cmd_folder == 1:
-            folder_name = input('Введите название папки:')
-            create_folder(folder_name)
-            print('Начинаю загрузку на Яндекс.Диск...')
+        print('Начинаю загрузку на Яндекс.Диск...')
         with open('filedata_yandex.json', 'w') as file:
             counter = 1
             data = dict()
@@ -87,6 +90,8 @@ class Yandex:
                 counter += 1
             json.dump(data, file, indent=4)
             print('Загрузка на Яндекс.Диск завершена.')
-create_folder('POP')
+
+
+
 
 

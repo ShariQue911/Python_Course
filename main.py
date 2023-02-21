@@ -27,6 +27,7 @@ def main():
             if upload_cmd < 1 or upload_cmd > 2:
                 print('Неверно введена команда\n')
             elif upload_cmd == 1:
+                yand.create_folder(1)
                 yand.upload_urls_vk(vk_photo)
                 break
             elif upload_cmd == 2:
