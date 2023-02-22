@@ -1,6 +1,7 @@
 from gdrive import GDrive
 from yandex import Yandex
 from vkontakte import VK
+import logging
 
 
 
@@ -37,3 +38,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+logging.basicConfig(level = logging.INFO, filename = 'main.log', filemode = 'w')
+logging.debug('DebugMSG')
+logging.info('logINFO')
